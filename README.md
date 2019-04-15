@@ -1,2 +1,2 @@
 # toniaAlarm
-web configuration for sound recognition alarm
+web configuration for sound recognition alarm device
