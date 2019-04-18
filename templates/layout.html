@@ -1,0 +1,62 @@
+{% from "macros.html" import nav_link with context %}
+{% from "macros.html" import nav_span with context %}
+<!DOCTYPE html>
+<html>
+  {% block head %}
+    <title>{% block title %}{% endblock %} flask jinja2 first example</title>
+  {% endblock %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/baseStyle.css') }}">
+</head>
+<body>
+  <nav class="container">
+    <div class="horz">
+      {{nav_span('root', 'index /') }}
+      {{nav_span('home', 'home page') }}
+      {{nav_span('about', 'about us') }}
+      {{nav_span('contact', 'contacts us') }}
+      {{nav_span('search', 'search keyword') }}
+      <div>
+        <form method="post" action="/search">
+          <input name="keyword" type="text">
+          <button type="submit">click</button>
+        </form>
+      </div>
+      <div>
+        <select onchange="location = this.value;">
+          <option value="">dropDownMenu</option>
+          {{nav_link('root', 'index /') }}
+          {{nav_link('home', 'home page') }}
+          {{nav_link('about', 'about us') }}
+          {{nav_link('contact', 'contact us') }}
+          {{nav_link('search', 'search keyword') }}
+        </select>
+      </div>
+      <div>
+        <a 
+          href="/shutdown" 
+          title="shutdown python {{pyVer}}">
+          <img src="{{ url_for('static', filename='imgs/shutdown.png') }}" width="32"/>
+        </a>
+      </div>
+      <div>python {{pyVer}}</div>
+    </div>
+  </nav>
+  <div class="subCont">
+    {% block heading %}
+      <h2>{% block page %}{% endblock %} - Flask Super Example</h2>
+    {% endblock %}
+    <h3>This is part of my base template</h3><br>
+    {% block content %}{% endblock %}<br>
+    <h2>This is part of my base template</h2> 
+    <div class="footer">
+      {% block footer %}
+        Watch! This will be added to my
+        base and child templates using the super
+        powerful super block!<br>
+      {% endblock %}
+    </div><br>
+  </div>
+</body>
+</html>
