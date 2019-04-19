@@ -1,5 +1,6 @@
-{% from "macros.html" import footer %}
+{% from "macros.html" import header %}
 {% from "macros.html" import nav_li with context %}
+{% from "macros.html" import footer %}
 <!DOCTYPE html>
 <html lang="en">
   <title>{{ title }}</title>
@@ -11,12 +12,12 @@
   </head>
   {% endblock %}
   <body>
-    <header>---------- header ------------</header>
+    <header><img src=/static/imgs/toniaTranspIco.png class="ico48"> {{ header() }}</header>
     <section>
       <nav>
         <ul>
-          {{nav_li('home', 'home') }}
-          {{nav_li('getAlarmStatus', 'getAlarmStatus') }}
+          {{nav_li('home', 'alarm sounds') }}
+          {{nav_li('getAlarmStatus', 'get alarm status') }}
           {{nav_li('login', 'logout') }}
           {{nav_li('halt', 'halt') }}
         </ul>
@@ -28,7 +29,7 @@
           {% endblock %}
         </article>
     </section>
-    <footer>--------- footer --------------</footer>
+    <footer>{{ footer('18/19') }}</footer>
   </body>
 </html>
 
