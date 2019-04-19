@@ -1,29 +1,57 @@
-h2 {color: darkred;}
-h3 {color: darkblue;}
-div {
-  padding-top: 0px;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-bottom: 0px;
+* {
+  box-sizing: border-box;
 }
-.container {
-  padding-top: 10px;
-  border-style: solid;
-  background-color:lightblue;
+body {
+  font-family: Arial, Helvetica, sans-serif;
 }
-.subCont {
-  padding-top: 10px;
-  border-style: solid;
-  background-color:lightgreen;
+/* Style the header */
+header {
+  color: darkgreen;
+  background-color: lightgreen;
+  padding: 10px;
+  text-align: center;
 }
-.active {
-  font-size:1.5em;
-  font-weight:bold;  
+/* Create two columns/boxes that floats next to each other */
+nav {
+  color: blue;
+  background-color: lightblue;
+  float: left;
+  padding: 10px;
+  width: 30%;
 }
-.footer {
-  border-style: solid;
-  background-color:grey;
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
 }
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: white;
+}
+/* Clear floats after the columns */
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Style the footer */
+footer {
+  color: darkgreen;
+  background-color: lightgreen;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+
 .big {
   font-size:em;
   font-weight:bold;  
@@ -32,6 +60,6 @@ div {
   font-size:0.8em;
   font-weight:normal;  
 }
-.horz {
-  display: flex;
+.ico48 {
+  width: 48px;
 }

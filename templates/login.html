@@ -1,3 +1,4 @@
+{% from "macros.html" import footer %}
 <!DOCTYPE html>
 <html>
   <title>{{title}}</title>
@@ -5,11 +6,12 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/baseStyle.css') }}">
 </head>
   <body>
-    <div class="big">toniaAlarm</div><div class="small">{{ current_time | datetimefilter }}</div>
-    <form method="post" action="/validate"> 
+    <div class="big"><img src=/static/imgs/toniaTranspIco.png class="ico48"> toniaAlarm</div><div class="small">{{ currentTime | datetimefilter }}</div>
+    <form method="post" action="/home"> 
       username: <input type="text" name="username"><br>
       password: <input type="password" name="password"><br>
       <button type="submit">submit</button>
-    </form> 
+    </form><br> 
+    {{ footer('18/19') }} 
   </body>
 </html>

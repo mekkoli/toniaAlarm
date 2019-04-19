@@ -13,23 +13,35 @@ def datetimefilter(value, format='%Y-%m-%d %02H:%02M:%02S'):
 def login():
   return render_template(
     'login.html',
-    current_time=datetime.datetime.now(),
-    title="tonia alarm web configuration"
+    currentTime = datetime.datetime.now(),
+    annoScolas = "18/19",
+    title = "tonia alarm web configuration"
   )
 
-
-@app.route("/validate", methods=['POST'])
-def validate():
-  if request.method == 'GET':
-    return 'no get method, only post'
-  else:
-    username = request.form['username']
+@app.route("/home", methods=['POST', 'GET'])
+def home():
+  if request.method == 'POST':
+    username = request.form['username'],
     password = request.form['password']
-    return username + ' '  + password
+  else:
+    username = ("none","no user")
+  return render_template(
+    'template.html',
+    currentTime = datetime.datetime.now(),
+    title = "tonia alarm web configuration",
+    user = username[0]
+  )
 
+@app.route("/getAlarmStatus")
+def getAlarmStatus():
+  return render_template(
+    'template.html',
+    currentTime = datetime.datetime.now(),
+    title = "tonia alarm status"
+  )
 
-@app.route('/shutdown')
-def shutdown():
+@app.route('/halt')
+def halt():
     shutdown_server()
     return 'python ' + platform.python_version() + ' by by ...'
 
