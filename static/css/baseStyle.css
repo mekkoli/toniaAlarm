@@ -17,7 +17,7 @@ nav {
   background-color: lightblue;
   float: left;
   padding: 10px;
-  width: 30%;
+  width: 25%;
 }
 /* Style the list inside the menu */
 nav ul {
@@ -27,7 +27,7 @@ nav ul {
 article {
   float: left;
   padding: 20px;
-  width: 70%;
+  width: 75%;
   background-color: white;
 }
 /* Clear floats after the columns */
@@ -52,14 +52,19 @@ footer {
   }
 }
 
+/* my simplest css */
 .big {
   font-size:em;
   font-weight:bold;  
+  text-align: left;
 }
 .small {
   font-size:0.8em;
   font-weight:normal;  
+  text-align: right;
 }
-.ico48 {
-  width: 48px;
+
+.login { 
+  background-color: white;
+  border:1px #ccc solid;
 }

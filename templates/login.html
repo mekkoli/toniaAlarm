@@ -1,17 +1,16 @@
-{% from "macros.html" import footer %}
-<!DOCTYPE html>
-<html>
-  <title>{{title}}</title>
-<head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/baseStyle.css') }}">
-</head>
-  <body>
-    <div class="big"><img src=/static/imgs/toniaTranspIco.png class="ico48"> toniaAlarm</div><div class="small">{{ currentTime | datetimefilter }}</div>
+{% extends "base.html" %}
+{% block title %}home{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block article %}
+  <article>
     <form method="post" action="/home"> 
-      username: <input type="text" name="username"><br>
-      password: <input type="password" name="password"><br>
-      <button type="submit">submit</button>
+      <table>
+        <tr><td>username:</td><td><input type="text" name="username" class="login"></td></tr>
+        <tr><td>password:</td><td><input type="password" name="password" class="login"></td></tr>
+        <tr><td><button type="submit">submit</button></td></tr>
+      </table>
     </form><br> 
-    {{ footer('18/19') }} 
-  </body>
-</html>
+  </article>
+{% endblock %}

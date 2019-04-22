@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 pw.txt
+trash
 __pycache__/
 *.py[cod]
 *$py.class

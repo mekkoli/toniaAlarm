@@ -24,9 +24,9 @@ def home():
     username = request.form['username'],
     password = request.form['password']
   else:
-    username = ("none","no user")
+    username = ("no user", "none")
   return render_template(
-    'template.html',
+    'sounds.html',
     currentTime = datetime.datetime.now(),
     title = "tonia alarm web configuration",
     user = username[0]
@@ -35,7 +35,7 @@ def home():
 @app.route("/getAlarmStatus")
 def getAlarmStatus():
   return render_template(
-    'template.html',
+    'status.html',
     currentTime = datetime.datetime.now(),
     title = "tonia alarm status"
   )
