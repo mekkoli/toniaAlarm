@@ -9,7 +9,7 @@ header {
   color: darkgreen;
   background-color: lightgreen;
   padding: 10px;
-  text-align: center;
+  text-align:left;
 }
 /* Create two columns/boxes that floats next to each other */
 nav {
@@ -41,7 +41,7 @@ footer {
   color: darkgreen;
   background-color: lightgreen;
   padding: 10px;
-  text-align: center;
+  text-align:right;
 }
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
@@ -56,12 +56,10 @@ footer {
 .big {
   font-size:em;
   font-weight:bold;  
-  text-align: left;
 }
 .small {
   font-size:0.8em;
   font-weight:normal;  
-  text-align: right;
 }
 
 .login { 

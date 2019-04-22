@@ -5,12 +5,12 @@
 {% endblock %}
 {% block article %}
   <article>
-    <form method="post" action="/home"> 
+    <form method="post" action="/"> 
       <table>
         <tr><td>username:</td><td><input type="text" name="username" class="login"></td></tr>
         <tr><td>password:</td><td><input type="password" name="password" class="login"></td></tr>
-        <tr><td><button type="submit">submit</button></td></tr>
+        <tr><td><button type="submit">submit</button></td><td class="small">{{ message }}</td></tr>
       </table>
-    </form><br> 
+    </form> 
   </article>
 {% endblock %}

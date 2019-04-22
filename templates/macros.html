@@ -2,7 +2,9 @@
   tonia alarm web configuration
 {% endmacro %}
 {% macro footer(as) %}
-  <div class="small">&copy; Copyright 2019 <a href="http://www.fermi-mo.gov.it/" target="_blank">iti fermi modena a.s. {{ as }}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/halt"><img src="/static/imgs/off.png" width="16"></a></div>
+  &copy; Copyright 2019 <a href="http://www.fermi-mo.gov.it/" target="_blank">iti fermi modena a.s. {{ as }}</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="/halt"><img src="/static/imgs/off.png" width="16"></a>
 {% endmacro %}
 {% macro nav_li(endpoint,clickStr) %}
   {% if request.endpoint.endswith(endpoint) %}
