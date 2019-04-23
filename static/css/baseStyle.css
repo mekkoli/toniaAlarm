@@ -4,20 +4,34 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* unvisited link */
+a:link {
+  color: #070;
+}
+/* visited link */
+a:visited {
+  color: darkgreen;
+}
+
 /* Style the header */
 header {
   color: darkgreen;
   background-color: lightgreen;
-  padding: 10px;
+  padding: 5px;
   text-align:left;
+  border: 1px solid darkgreen;
+  border-radius: 10px;
 }
 /* Create two columns/boxes that floats next to each other */
 nav {
-  color: darkblue;
-  background-color: lightblue;
+  color: darkgreen;
+  background-color: lightgreen;
   float: left;
-  padding: 10px;
-  width: 25%;
+  padding: 5px;
+  width: 30%;
+  border: 1px solid darkgreen;
+  border-radius: 10px;
 }
 /* Style the list inside the menu */
 nav ul {
@@ -26,8 +40,8 @@ nav ul {
 }
 article {
   float: left;
-  padding: 20px;
-  width: 75%;
+  padding: 10px;
+  width: 70%;
   background-color: white;
 }
 /* Clear floats after the columns */
@@ -40,8 +54,10 @@ section:after {
 footer {
   color: darkgreen;
   background-color: lightgreen;
-  padding: 10px;
+  padding: 5px;
   text-align:right;
+  border: 1px solid darkgreen;
+  border-radius: 10px;
 }
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
