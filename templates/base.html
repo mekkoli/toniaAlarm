@@ -3,7 +3,7 @@
 {% from "macros.html" import footer %}
 <!DOCTYPE html>
 <html lang="en">
-  <title>{% block title %}{% endblock %}</title>
+  <title>{% block title %}{{ title }}{% endblock %}</title>
   {% block head %}
     <head>
       <meta charset="utf-8">
@@ -13,24 +13,31 @@
   {% endblock %}
   <body>
     {% block content %}
-      <header class="big"><img src=/static/imgs/toniaTranspIco.png width="48"> {{ header() }} {% if user %} <span class="small">({{ user }})</span> {% endif %}</header>
+      <header class="big">
+        <img src=/static/imgs/toniaTranspIco.png width="48"> {{ header() }} 
+        {% if user %}<span class="small">(as {{ user }})</span>{% endif %}
+      </header>
+      <div class="whiteRow">&nbsp;</div>
       <section>
         {% block nav %}
           {% if session['logged_in'] %}
             <nav>
-              <ul>
-                {{nav_li('home', 'alarm sounds') }}
-                {{nav_li('getAlarmStatus', 'get alarm status') }}
-                {{nav_li('logout', 'logout') }}
-              </ul>
+              {{nav_li('getAlarmStatus', 'alarm status') }}
+              {{nav_li('home', 'alarm sounds') }}
+              {{nav_li('sessionGet', 'read session vars') }}
+              {{nav_li('logout', 'logout') }}
             </nav>
           {% endif %}
         {% endblock %}
         {% block article %}
         {% endblock %}
       </section>
+      <div class="whiteRow">&nbsp;</div>
       {% block footer %}
-        <footer class="small">{{ footer('18/19') }}</footer>
+        <footer class="small">
+          {{ currentTime | datetimefilter }}
+          {{ footer('18/19') }}
+        </footer>
       {% endblock %}
     {% endblock %}
   </body>

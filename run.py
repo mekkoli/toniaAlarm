@@ -44,10 +44,10 @@ def login():
           session['logged_in'] = True
           return redirect(url_for('getAlarmStatus'))
         else:
-          message = "wrong (user)/pw"
+          message = "wrong user/Pw"
       else:
         if user != "":
-          message = "wrong user/(pw)"
+          message = "wrong User/pw"
         user = ""
     else:
       message = ""
@@ -75,11 +75,29 @@ def getAlarmStatus():
     return render_template(
       'status.html',
       currentTime = datetime.datetime.now(),
-      title = "tonia alarm status",
+      title = "get alarm status",
       user = session['username']
     )
   else:
     return redirect(url_for('login'))
+
+@app.route('/session')
+def sessionGet():
+  sessionDict = {
+    'username':session['username'],
+    'logged_in': session.get('logged_in')
+  }
+  sessionDict['request.endpoint'] = request.endpoint
+  for key, values in request.environ.items():
+    sessionDict[key]=values
+  sessionDict['path'] = request.path
+  return render_template(
+    'session.html',
+    currentTime = datetime.datetime.now(),
+    title = "read session vars",
+    sessionDict = sessionDict,
+    user = session['username']
+  ) 
 
 @app.route('/halt')
 def halt():

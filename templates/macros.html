@@ -8,8 +8,8 @@
 {% endmacro %}
 {% macro nav_li(endpoint,clickStr) %}
   {% if request.endpoint.endswith(endpoint) %}
-    <li class="big">({{ clickStr }})</li>
+    <ul class="big">{{ clickStr }}</ul>
   {% else %}
-    <li><a href="{{url_for(endpoint)}}">{{ clickStr }}</a></li>
+    <ul><a href="{{url_for(endpoint)}}">{{ clickStr }}</a></ul>
   {% endif %}
 {% endmacro %}

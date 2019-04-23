@@ -5,6 +5,8 @@
 {% endblock %}
 {% block article %}
   <article>
-    <div class="big">alarm status: [enabled/disabled]</div>
+    {% for key, value in sessionDict.items() %}
+      <div class="small">{{key}}: '{{value}}'</div>
+    {% endfor %} 
   </article>
 {% endblock %}

@@ -13,6 +13,9 @@ a:link {
 a:visited {
   color: darkgreen;
 }
+a:hover {
+  font-weight:bold;  
+}
 
 /* Style the header */
 header {
@@ -26,17 +29,22 @@ header {
 /* Create two columns/boxes that floats next to each other */
 nav {
   color: darkgreen;
-  background-color: lightgreen;
+  background-color: #efe;
   float: left;
-  padding: 5px;
+  padding-left: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   width: 30%;
   border: 1px solid darkgreen;
   border-radius: 10px;
+  min-height: 200px;
+  overflow: hiden;
 }
 /* Style the list inside the menu */
 nav ul {
   list-style-type: none;
-  padding: 0;
+  padding: 4px;
+  line-height: 0px;
 }
 article {
   float: left;
@@ -81,4 +89,9 @@ footer {
 .login { 
   background-color: white;
   border:1px #ccc solid;
+}
+
+.whiteRow { 
+  background-color: white;
+  line-height: 2px;
 }
