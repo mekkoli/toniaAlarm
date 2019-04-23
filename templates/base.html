@@ -1,0 +1,37 @@
+{% from "macros.html" import header %}
+{% from "macros.html" import nav_li with context %}
+{% from "macros.html" import footer %}
+<!DOCTYPE html>
+<html lang="en">
+  <title>{% block title %}{% endblock %}</title>
+  {% block head %}
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/baseStyle.css') }}">
+    </head>
+  {% endblock %}
+  <body>
+    {% block content %}
+      <header class="big"><img src=/static/imgs/toniaTranspIco.png width="48"> {{ header() }} {% if user %} <span class="small">({{ user }})</span> {% endif %}</header>
+      <section>
+        {% block nav %}
+          {% if session['logged_in'] %}
+            <nav>
+              <ul>
+                {{nav_li('home', 'alarm sounds') }}
+                {{nav_li('getAlarmStatus', 'get alarm status') }}
+                {{nav_li('logout', 'logout') }}
+              </ul>
+            </nav>
+          {% endif %}
+        {% endblock %}
+        {% block article %}
+        {% endblock %}
+      </section>
+      {% block footer %}
+        <footer class="small">{{ footer('18/19') }}</footer>
+      {% endblock %}
+    {% endblock %}
+  </body>
+</html>

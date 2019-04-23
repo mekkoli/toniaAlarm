@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}home{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block article %}
+<article>
+  dateTime: {{ currentTime | datetimefilter }}<br>
+  <div class="big">sounds list</div>
+</article>
+{% endblock %}
