@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import datetime
 import platform
+import subprocess
 
 app = Flask(__name__)
 # Set the secret key to some random bytes. Keep this really secret!
@@ -18,12 +19,38 @@ def datetimefilter(value, format='%Y-%m-%d %02H:%02M:%02S'):
 @app.route("/home")
 def home():
   if session.get('logged_in'):
+    fileListStr = subprocess.check_output(["ls", "-l", "-h", "--time-style=long-iso", "static/snds/"])
+    fileList=fileListStr.split(b'\n')
+    files=[]
+    count = 0
+    for str in fileList:
+      desFile = str.split()
+      if len(desFile) >=  4:
+        desFile.pop(0)
+        desFile.pop(0)
+        desFile.pop(0)
+        desFile.pop(0)
+        desFileAscii = []
+        for str in desFile:
+          desFileAscii.append(str.decode('utf-8'))
+        count += 1
+        desFileAscii.insert(0,count)
+        date = desFileAscii.pop(2)
+        time = desFileAscii.pop(2)
+        dateTime = date + " " + time
+        desFileAscii.insert(2,dateTime)
+        fileName = ""
+        while len(desFileAscii) > 3:
+          fileName += desFileAscii.pop(3) + " "
+        desFileAscii.append(fileName)
+        files.append(desFileAscii)
     return render_template(
       'sounds.html',
       currentTime = datetime.datetime.now(),
       annoScolas = "18/19",
       title = "tonia alarm web configuration",
-      user = session['username']
+      user = session['username'],
+      fileList = files
     )
   else:
     return redirect(url_for('login'))

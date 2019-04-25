@@ -6,5 +6,15 @@
 {% block article %}
 <article>
   <div class="big">sounds list</div>
+  <table class="listSound">
+    <tr>
+      <th>n</th><th>filename</th><th>dateTime</th><th>size</th>
+    </tr>
+    {% for fileName in fileList %}
+        <tr>
+          <td>{{ fileName[0] }}</td><td>{{ fileName[3] }}</td><td>{{ fileName[2] }}</td><td>{{ fileName[1] }}</td>
+        </tr>
+    {% endfor %}
+  </table>
 </article>
 {% endblock %}
