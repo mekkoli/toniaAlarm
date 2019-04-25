@@ -113,7 +113,7 @@ def shutdown_server():
 if __name__ == '__main__':
 
   # flask on default port 5000 only on localhost
-  app.run(debug=True, host='0.0.0.0', port=2222)
+  app.run(debug=True, port=2222)
   # flask on all interfaces
   # app.run(debug=True, host='0.0.0.0')
   # flask on other port > 1024
