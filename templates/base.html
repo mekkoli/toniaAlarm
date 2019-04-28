@@ -21,8 +21,8 @@
         {% block nav %}
           {% if session['logged_in'] %}
             <nav>
+              {{nav_li('sounds', 'alarm sounds') }}
               {{nav_li('getAlarmStatus', 'alarm status') }}
-              {{nav_li('home', 'alarm sounds') }}
               {{nav_li('sessionGet', 'read session vars') }}
               {{nav_li('logout', 'logout') }}
             </nav>

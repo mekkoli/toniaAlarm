@@ -12,9 +12,19 @@
     </tr>
     {% for fileName in fileList %}
         <tr>
-          <td>{{ fileName[0] }}</td><td>{{ fileName[3] }}</td><td>{{ fileName[2] }}</td><td>{{ fileName[1] }}</td>
+          <td>{{ fileName[0] }}</td>
+          <td>
+            {{ fileName[3] }}<br>
+            <audio controls><source src="/static/snds/{{ fileName[3] }}"></audio>
+            </td>
+            <td>{{ fileName[2] }}</td>
+            <td>{{ fileName[1] }}</td>
         </tr>
     {% endfor %}
+    <tr>
+      <form method=post enctype=multipart/form-data action="/upload">
+      <td>file name: </td><td><input type="file" name="file" method="post" ></td><td><input type="submit" value="Upload"></td><td>100 MB siz max</td>
+    </tr>
   </table>
 </article>
 {% endblock %}

@@ -2,10 +2,17 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import datetime
 import platform
 import subprocess
+from werkzeug.utils import secure_filename
+import os
+
+UPLOAD_FOLDER = 'static/snds'
+ALLOWED_EXTENSIONS = set(['mp3'])
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'azzarola'
+
 credentials = {
   'tonia':'Alarm',
   'azz': 'azz'
@@ -16,10 +23,10 @@ def datetimefilter(value, format='%Y-%m-%d %02H:%02M:%02S'):
   """Convert a datetime to a differentformat."""
   return value.strftime(format)
 
-@app.route("/home")
-def home():
+@app.route("/sounds")
+def sounds():
   if session.get('logged_in'):
-    fileListStr = subprocess.check_output(["ls", "-l", "-h", "--time-style=long-iso", "static/snds/"])
+    fileListStr = subprocess.check_output(["ls", "-l", "-h", "-tr", "--time-style=long-iso", "static/snds/"])
     fileList=fileListStr.split(b'\n')
     files=[]
     count = 0
@@ -136,6 +143,29 @@ def shutdown_server():
     if func is None:
       raise RuntimeError('Not running with the Werkzeug Server')
     func()
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('sounds', filename=filename))
 
 if __name__ == '__main__':
 

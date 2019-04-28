@@ -97,10 +97,9 @@ footer {
   line-height: 2px;
 }
 
-.listSound table {
+.listSound table, tr {
   border-collapse: collapse;
   width: 100%;
-
 }
 .listSound th, td {
   text-align: left;
@@ -111,5 +110,9 @@ footer {
 .listSound tr {
   width:100%;
 }
-
 .listSound tr:nth-child(even) {background-color: #cfc;}
+.audio_ {
+display: block;
+}
+.audio {
+}
