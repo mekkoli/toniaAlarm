@@ -8,11 +8,11 @@
   <a href="/halt"><img src="{{ url_for('static', filename='imgs/off.png') }}" width="16"></a> 
 {% endmacro %}
 
-{% macro nav_li(endpoint,clickStr) %}
+{% macro nav_li(endpoint, clickStr, target) %}
   {% if request.endpoint.endswith(endpoint) %}
     <ul class="big">{{ clickStr }}</ul>
   {% else %}
-    <ul><a href="{{url_for(endpoint)}}">{{ clickStr }}</a></ul>
+    <ul><a href="{{url_for(endpoint)}}" {% if target %}target="{{ target }}"{% endif %}>{{ clickStr }}</a></ul>
   {% endif %}
 {% endmacro %}
 
