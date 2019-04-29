@@ -6,5 +6,27 @@
 {% block article %}
 <article>
   <div class="big">sounds list</div>
+  <table class="listSound">
+    <tr>
+      <th>n</th><th>filename</th><th>dateTime</th><th>size</th><th>del</th>
+    </tr>
+    {% for fileName in fileList %}
+        <tr>
+          <td>{{ fileName[0] }}</td>
+          <td>
+            {{ fileName[3] }}<br>
+            <audio controls><source src="/static/snds/{{ fileName[3] }} "></audio>
+            </td>
+            <td>{{ fileName[2] }}</td>
+            <td>{{ fileName[1] }}</td>
+            <td><a href="{{url_for('delFile', fileName=fileName[3]) }}"><img width="32"src="{{ url_for('static', filename='imgs/delete.png') }}"></a></td>
+        </tr>
+    {% endfor %}
+    <tr>
+      <form method=post enctype=multipart/form-data action="/upload">
+      <td>file name: </td><td><input type="file" name="file" method="post" ></td><td><input type="submit" value="Upload"></td><td>{{ maxMb }}M</td><td>max</td>
+    </tr>
+  </table>
+  {{ messageList() }}
 </article>
 {% endblock %}

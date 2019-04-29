@@ -96,3 +96,23 @@ footer {
   background-color: white;
   line-height: 2px;
 }
+
+.listSound table, tr {
+  border-collapse: collapse;
+  width: 100%;
+}
+.listSound th, td {
+  text-align: left;
+  padding: 4px;
+  font-size:0.8em;
+  font-weight:normal;
+}
+.listSound tr {
+  width:100%;
+}
+.listSound tr:nth-child(even) {background-color: #cfc;}
+.audio_ {
+display: block;
+}
+.audio {
+}
