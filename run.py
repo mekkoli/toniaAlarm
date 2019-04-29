@@ -192,6 +192,10 @@ def delFile(fileName):
 def console():
   return ""
 
+@app.route('/myConsole')
+def myConsole():
+  return render_template('myConsole.html')
+
 if __name__ == '__main__':
 
   # flask on default port 5000 only on localhost
