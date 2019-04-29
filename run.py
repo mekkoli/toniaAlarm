@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 import datetime
 import platform
 import subprocess
@@ -7,11 +7,19 @@ import os
 
 UPLOAD_FOLDER = 'static/snds'
 ALLOWED_EXTENSIONS = set(['mp3'])
+MAX_MB = 8
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = MAX_MB * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'azzarola'
+
+
+# 2019-04-29 non funzia
+@app.errorhandler(413)
+def request_entity_too_large(e):
+  return render_template('413.html'), 413
 
 credentials = {
   'tonia':'Alarm',
@@ -49,6 +57,7 @@ def sounds():
         fileName = ""
         while len(desFileAscii) > 3:
           fileName += desFileAscii.pop(3) + " "
+        fileName = fileName[:-1]  #del last space
         desFileAscii.append(fileName)
         files.append(desFileAscii)
     return render_template(
@@ -57,7 +66,8 @@ def sounds():
       annoScolas = "18/19",
       title = "tonia alarm web configuration",
       user = session['username'],
-      fileList = files
+      fileList = files,
+      maxMb = MAX_MB
     )
   else:
     return redirect(url_for('login'))
@@ -76,7 +86,7 @@ def login():
         if credentials[user] == pw:
           session['username'] = user
           session['logged_in'] = True
-          return redirect(url_for('getAlarmStatus'))
+          return redirect(url_for('sounds'))
         else:
           message = "wrong user/Pw"
       else:
@@ -94,7 +104,7 @@ def login():
       message = message
     )
   else:
-    return redirect(url_for('getAlarmStatus'))
+    return redirect(url_for('sounds'))
   
 @app.route("/logout")
 def logout():
@@ -151,21 +161,31 @@ def allowed_file(filename):
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('sounds', filename=filename))
+  if request.method == 'POST':
+    # check if the post request has the file part
+    if 'file' not in request.files:
+      flash('no file part')
+      return redirect(url_for('sounds'))
+    # if user does not select file, browser also
+    # submit an empty part without filename
+    file = request.files['file']
+    if file.filename == '':
+      flash('no selected file')
+      return redirect(url_for('sounds'))
+    if file and allowed_file(file.filename):
+      filename = secure_filename(file.filename)
+      file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      return redirect(url_for('sounds'))
+  else:
+    flash('no get')
+    return redirect(url_for('sounds'))
+  flash('denied file type')
+  return redirect(url_for('sounds'))
+
+@app.route('/delFile/<string:fileName>')
+def delFile(fileName):
+  subprocess.call(["rm", "static/snds/" + fileName])
+  return redirect(url_for('sounds'))
 
 if __name__ == '__main__':
 
