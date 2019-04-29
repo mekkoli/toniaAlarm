@@ -111,8 +111,20 @@ footer {
   width:100%;
 }
 .listSound tr:nth-child(even) {background-color: #cfc;}
-.audio_ {
-display: block;
+.longList table, th, tr, td {
+  padding:0px;
 }
-.audio {
+.key {
+  font-weight: bold;
+  text-align:right;
+  background-color: #cec;
+}
+.value {
+  text-align:left;
+  background-color: #cec;
+}
+.metaData {
+  text-align:center;
+  color: #cec;
+  background-color: darkgreen;
 }

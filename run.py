@@ -140,6 +140,7 @@ def sessionGet():
     currentTime = datetime.datetime.now(),
     title = "read session vars",
     sessionDict = sessionDict,
+    appDict = app.config,
     user = session['username']
   ) 
 
@@ -186,6 +187,10 @@ def upload_file():
 def delFile(fileName):
   subprocess.call(["rm", "static/snds/" + fileName])
   return redirect(url_for('sounds'))
+
+@app.route('/console')
+def console():
+  return ""
 
 if __name__ == '__main__':
 

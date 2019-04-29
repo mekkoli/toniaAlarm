@@ -5,8 +5,32 @@
 {% endblock %}
 {% block article %}
   <article>
-    {% for key, value in sessionDict.items() %}
-      <div class="small">{{key}}: '{{value}}'</div>
-    {% endfor %} 
+    <div class="big">session dict:</div>
+    <table class="longList">
+      <tr class="metaData">
+        <th>key</th>
+        <th>value</th>
+      </tr>
+      {% for key, value in sessionDict.items() %}
+        <tr>
+            <td class="key">{{key}}:</td>
+            <td class="value">'{{value}}'</td>
+        </tr>
+      {% endfor %} 
+    </table>
+    <br>
+    <div class="big">app.config dict:</div>
+    <table>
+      <tr class="metaData">
+        <th>key</th>
+        <th>value</th>
+      </tr>
+      {% for key, value in appDict.items() %}
+        <tr>
+            <td class="key">{{key}}:</td>
+            <td class="value">'{{value}}'</td>
+        </tr>
+      {% endfor %} 
+    </table>
   </article>
 {% endblock %}
