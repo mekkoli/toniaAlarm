@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Console // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css" type="text/css">
+    <!-- We need to make sure this has a favicon so that the debugger does
+         not by accident trigger a request to /favicon.ico which might
+         change the application state. -->
+    <link rel="shortcut icon" href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=jquery.js"></script>
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script type="text/javascript">
+      var TRACEBACK = -1,
+          CONSOLE_MODE = true,
+          EVALEX = true,
+          EVALEX_TRUSTED = true,
+          SECRET = "vRJi5eLUn1IlhIgtd54N";
+    </script>
+  </head>
+  <body style="background-color: #000; color:#fff;">
+
+    <div class="debugger">
+      <h1>Interactive Console</h1>
+      <div class="console">
+        <div class="inner">The Console requires JavaScript.</div>
+      </div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+{#
+    <div style="color: #fff; background-color: #000">
+      <h1>Interactive Console</h1>
+      <div class="console" style="color: #fff; background-color: #000; text-align:left;">
+        <div class="inner" >The Console requires JavaScript.</div>
+      </div>
+    </div>
+#}
+
