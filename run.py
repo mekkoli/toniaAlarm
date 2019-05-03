@@ -15,7 +15,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'azzarola'
 
-
 # 2019-04-29 non funzia
 @app.errorhandler(413)
 def request_entity_too_large(e):
@@ -118,7 +117,7 @@ def login():
       message = message
     )
   else:
-    return redirect(url_for('sounds'))
+    return redirect(url_for('confs'))
   
 @app.route("/logout")
 def logout():
