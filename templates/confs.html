@@ -5,37 +5,37 @@
 {% endblock %}
 {% block article %}
 <article>
-  <table>
+  <table class="listSound">
     <tr>
-      <td>
-        <table class="listSound">
-          <tr>
-            <th>output socket on/off</th>
-          </tr>
-            {% for n in range(socketList|length) %}
-              <tr>
-                <td class="bigBig"> {{ n }}
-                  {% if socketList[n] == False %}
-                    <img width="48" title="{{ n }} off (click to switch on)" src="{{ url_for('static', filename='imgs/socketOff.png') }}">
-                  {% else %}
-                    <img width="48" title="{{ n }} on (click to switch off)" src="{{ url_for('static', filename='imgs/socketOn.png') }}">
-                  {% endif %}
-                </td>
-              </tr>
-            {% endfor %}
-        </table>
-      </td>
-      <td>
-        <table class="listSound">
-          <tr>
-            <th>telegram</th>
-          </tr>
-          <tr>
-            <td class="bigBig">azz</td>
-          </tr>
-        </table>
-      <td>
+      <th>general on/off alarm</th><th>output socket on/off</th><th>telegram bot</th>
     </tr>
+    {% for n in range(socketList|length) %}
+      <tr>
+        {% if n == 0 %}
+        <td class="big" style="text-align:center"> {{ power }}
+          {% if power == 'On' %}
+            <img width="40" title="on (click to switch on)" src="{{ url_for('static', filename='imgs/alarmOn.png') }}">
+          {% else %}
+            <img width="40" title="off (click to switch off)" src="{{ url_for('static', filename='imgs/alarmOff.png') }}">
+          {% endif %}
+        </td>
+        {% else %}
+          <td></td>
+        {% endif %}
+        <td class="bigBig"> {{ n + 1 }}
+          {% if socketList[n] == False %}
+            <img width="32" title="{{ n + 1 }} off (click to switch on)" src="{{ url_for('static', filename='imgs/socketOff.png') }}">
+          {% else %}
+            <img width="32" title="{{ n + 1 }} on (click to switch off)" src="{{ url_for('static', filename='imgs/socketOn.png') }}">
+          {% endif %}
+        </td>
+        {% if n == 0 %}
+        <td class="big" style="text-align:center">{{ telegramDict['botName']}}</td>
+        {% else %}
+        <td></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
   </table>
 </article>
 {% endblock %}

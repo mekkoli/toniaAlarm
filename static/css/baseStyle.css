@@ -83,7 +83,7 @@ footer {
   font-weight:bold;  
 }
 .bigBig {
-  font-size:1.5em;
+  font-size:3em;
   font-weight:bold; 
   vertical-align: middle; 
 }
@@ -112,8 +112,13 @@ footer {
   font-size:0.8em;
   font-weight:normal;
 }
+.listSound th {
+  font-weight:bold;
+}
 .listSound tr {
+  text-align: left;
   width:100%;
+  font-size:1em;
 }
 .listSound tr:nth-child(even) {background-color: #cfc;}
 .longList table, th, tr, td {

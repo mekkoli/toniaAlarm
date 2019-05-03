@@ -24,19 +24,15 @@ credentials = {
   'tonia':'Alarm',
   'azz': 'azz'
 }
-
 socketList = [
   True,
-  False,
-  True,
-  False  
+  False
 ]
-
+power = 'On'
 telegramDict = {
-	'user':		'telegramUser',
-	'cell':		'+393311067447',
-	'botKey':	'ldjhfkjsdhfkjsbfkhd',
-	'chatKey':	'sjdhfghds',
+	'botName': 'toniaBot',
+	'botKey':  'ldjhfkjsdhfkjsbfkhd',
+	'chatKey': 'sjdhfghds'
 }
 
 @app.template_filter("datetimefilter")
@@ -126,18 +122,6 @@ def logout():
   session.clear()
   return redirect(url_for('login'))
 
-@app.route("/getAlarmStatus")
-def getAlarmStatus():
-  if session.get('logged_in'):
-    return render_template(
-      'status.html',
-      currentTime = datetime.datetime.now(),
-      title = "get alarm status",
-      user = session['username']
-    )
-  else:
-    return redirect(url_for('login'))
-
 @app.route('/session')
 def sessionGet():
   sessionDict = {
@@ -163,6 +147,8 @@ def confs():
     'confs.html',
     currentTime = datetime.datetime.now(),
     socketList = socketList,
+    telegramDict = telegramDict,
+    power = power,
     title = "configure tonia alarm"
   ) 
 

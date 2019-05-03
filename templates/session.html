@@ -5,7 +5,7 @@
 {% endblock %}
 {% block article %}
   <article>
-    <div class="big">session dict:</div>
+    <div class="big">request.environ: session dictionary:</div>
     <table class="longList">
       <tr class="metaData">
         <th>key</th>
@@ -19,7 +19,7 @@
       {% endfor %} 
     </table>
     <br>
-    <div class="big">app.config dict:</div>
+    <div class="big">app.config: you can print values in interactive console</div>
     <table>
       <tr class="metaData">
         <th>key</th>
