@@ -28,7 +28,7 @@ socketList = [
   True,
   False
 ]
-power = 'On'
+power = 'on'
 telegramDict = {
 	'botName': 'toniaBot',
 	'botKey':  'ldjhfkjsdhfkjsbfkhd',
@@ -149,7 +149,8 @@ def confs():
     socketList = socketList,
     telegramDict = telegramDict,
     power = power,
-    title = "configure tonia alarm"
+    title = "configure tonia alarm",
+    user = session['username']
   ) 
 
 @app.route('/halt')
