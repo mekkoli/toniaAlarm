@@ -26,6 +26,20 @@ credentials = {
   'azz': 'azz'
 }
 
+socketList = [
+  True,
+  False,
+  True,
+  False  
+]
+
+telegramDict = {
+	'user':		'telegramUser',
+	'cell':		'+393311067447',
+	'botKey':	'ldjhfkjsdhfkjsbfkhd',
+	'chatKey':	'sjdhfghds',
+}
+
 @app.template_filter("datetimefilter")
 def datetimefilter(value, format='%Y-%m-%d %02H:%02M:%02S'):
   """Convert a datetime to a differentformat."""
@@ -86,7 +100,7 @@ def login():
         if credentials[user] == pw:
           session['username'] = user
           session['logged_in'] = True
-          return redirect(url_for('sounds'))
+          return redirect(url_for('confs'))
         else:
           message = "wrong user/Pw"
       else:
@@ -142,6 +156,15 @@ def sessionGet():
     sessionDict = sessionDict,
     appDict = app.config,
     user = session['username']
+  ) 
+
+@app.route('/confs')
+def confs():
+  return render_template(
+    'confs.html',
+    currentTime = datetime.datetime.now(),
+    socketList = socketList,
+    title = "configure tonia alarm"
   ) 
 
 @app.route('/halt')
