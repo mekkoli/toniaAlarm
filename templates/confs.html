@@ -4,50 +4,55 @@
   {{ super() }}
 {% endblock %}
 {% block article %}
-
-
-
-
-
-  <script>
-    jQuery(document).ready(function(){
-      jQuery("#power").click(function(){
-        alert("azz");
-        jQuery("#power").load("http://localhost:2222/static/azz.txt");
-      });
+<script>
+  jQuery(document).ready(function(){
+    jQuery("#power").click(function(){
+      jQuery("#power").load("{{ url_for('changePower') }}");
     });
-  </script>
-
-
-
-
+  });
+  
+  function socket(id){
+    jQuery("#" + id).load("{{ url_for('changeSocket', socket='') }}" + id);
+  }
+</script>
 <article>
   <table class="listSound">
     <tr>
-      <th>general on/off alarm</th><th>output socket on/off</th><th>telegram bot</th>
+      <th>general on/off alarm</th><th>output socket on/off</th><th>username</th><th>telegram bot</th>
     </tr>
     {% for n in range(socketList|length) %}
       <tr>
         {% if n == 0 %}
-        <td class="big" style="text-align:center"> {{ power }}
-          {% if power == 'On' %}
-            <img id="power" width="40" title="on (click to switch on)" src="{{ url_for('static', filename='imgs/alarmOn.png') }}">
+        <td id="power" class="big" style="text-align:center">
+          {% if power == 'on' %}
+             {{ power }}
+            <img width="40" title="on (click to switch on)" src="{{ url_for('static', filename='imgs/alarmOn.png') }}">
           {% else %}
-            <img id="power" width="40" title="off (click to switch off)" src="{{ url_for('static', filename='imgs/alarmOff.png') }}">
+             {{ power }}
+            <img width="40" title="off (click to switch off)" src="{{ url_for('static', filename='imgs/alarmOff.png') }}">
           {% endif %}
         </td>
         {% else %}
           <td></td>
         {% endif %}
-        <td class="bigBig"> {{ n + 1 }}
+        <td id="socket{{ n }}" class="bigBig"> {{ n + 1 }}
           {% if socketList[n] == False %}
-            <img id="socket{{ n }}" width="32" title="{{ n + 1 }} off (click to switch on)" src="{{ url_for('static', filename='imgs/socketOff.png') }}">
+            <img 
+              width="32"
+              onclick="socket('socket{{ n }}')"
+              title="socket {{ n + 1 }} off (click to switch on)"
+              src="{{ url_for('static', filename='imgs/socketOff.png') }}">
           {% else %}
-            <img id="socket{{ n }}" width="32" title="{{ n + 1 }} on (click to switch off)" src="{{ url_for('static', filename='imgs/socketOn.png') }}">
+            <img 
+              width="32"
+              onclick="socket('socket{{ n }}')"
+              title="socket {{ n + 1 }} on (click to switch off)"
+              src="{{ url_for('static', filename='imgs/socketOn.png') }}">
           {% endif %}
         </td>
         {% if n == 0 %}
-        <td class="big" style="text-align:center">{{ telegramDict['botName']}}</td>
+        <td class="big" style="text-align:center">{{ user }}</td>
+        <td class="big" style="text-align:center">{{ telegramDict['botName'] }}</td>
         {% else %}
         <td></td>
         {% endif %}

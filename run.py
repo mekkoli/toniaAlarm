@@ -205,6 +205,32 @@ def console():
 def myConsole():
   return render_template('myConsole.html')
 
+@app.route('/aj/power')
+def changePower():
+  global power
+  if power == 'on':
+    power='off'
+  else:
+    power = 'on'
+  return render_template(
+    '/aj/power.html',
+    power = power
+  )
+
+@app.route('/aj/socket/<string:socket>')
+def changeSocket(socket):
+  global socketList
+  n = int(socket[-1:])
+  if socketList[n] == True:
+    socketList[n] = False
+  else:
+    socketList[n] = True
+  return render_template(
+    '/aj/socket.html',
+    socket = socketList[n],
+    n = n
+  )
+
 if __name__ == '__main__':
 
   # flask on default port 5000 only on localhost
