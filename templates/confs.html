@@ -35,19 +35,19 @@
         {% else %}
           <td></td>
         {% endif %}
-        <td id="socket{{ n }}" class="bigBig"> {{ n + 1 }}
+        <td id="socket{{ n }}" class="big"> {{ n + 1 }}
           {% if socketList[n] == False %}
             <img 
               width="32"
               onclick="socket('socket{{ n }}')"
               title="socket {{ n + 1 }} off (click to switch on)"
-              src="{{ url_for('static', filename='imgs/socketOff.png') }}">
+              src="{{ url_for('static', filename='imgs/socketOff.png') }}"> off
           {% else %}
             <img 
               width="32"
               onclick="socket('socket{{ n }}')"
               title="socket {{ n + 1 }} on (click to switch off)"
-              src="{{ url_for('static', filename='imgs/socketOn.png') }}">
+              src="{{ url_for('static', filename='imgs/socketOn.png') }}"> on
           {% endif %}
         </td>
         {% if n == 0 %}

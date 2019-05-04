@@ -3,11 +3,11 @@
     width="32" 
     onclick="socket('socket{{ n }}')"
     title="socket {{ n + 1 }} off (click to switch on)" 
-    src="{{ url_for('static', filename='imgs/socketOff.png') }}">
+    src="{{ url_for('static', filename='imgs/socketOff.png') }}"> off
 {% else %} {{ n + 1 }}
   <img 
     width="32" 
     onclick="socket('socket{{ n }}')"
     title="socket {{ n + 1 }} on (click to switch off)" 
-    src="{{ url_for('static', filename='imgs/socketOn.png') }}">
+    src="{{ url_for('static', filename='imgs/socketOn.png') }}"> on
 {% endif %}
