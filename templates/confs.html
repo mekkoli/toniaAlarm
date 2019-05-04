@@ -26,10 +26,10 @@
         <td id="power" class="big" style="text-align:center">
           {% if power == 'on' %}
              {{ power }}
-            <img width="40" title="on (click to switch on)" src="{{ url_for('static', filename='imgs/alarmOn.png') }}">
+            <img width="40" title="on (click to switch off)" src="{{ url_for('static', filename='imgs/powerOn.png') }}">
           {% else %}
              {{ power }}
-            <img width="40" title="off (click to switch off)" src="{{ url_for('static', filename='imgs/alarmOff.png') }}">
+            <img width="40" title="off (click to switch on)" src="{{ url_for('static', filename='imgs/powerOff.png') }}">
           {% endif %}
         </td>
         {% else %}
