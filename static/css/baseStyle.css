@@ -3,6 +3,8 @@
 }
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color:black;
+  color: #080;
 }
 
 /* unvisited link */
@@ -15,7 +17,7 @@ a:visited {
 }
 a:hover {
   font-weight:bold;  
-  color: #030;
+  color: green;
 }
 
 /* Style the header */
@@ -40,6 +42,8 @@ nav {
   border-radius: 10px;
   min-height: 200px;
   overflow: hiden;
+  background-color:black;
+  color: #080;
 }
 /* Style the list inside the menu */
 nav ul {
@@ -51,13 +55,16 @@ article {
   float: left;
   padding: 10px;
   width: 70%;
-  background-color: white;
+  background-color:black;
+  color: #080;
 }
 /* Clear floats after the columns */
 section:after {
   content: "";
   display: table;
   clear: both;
+  background-color:black;
+  color: #080;
 }
 /* Style the footer */
 footer {
@@ -79,10 +86,12 @@ footer {
 
 /* my simplest css */
 .big {
+  color: green;
   font-size:em;
   font-weight:bold;  
 }
 .bigBig {
+  color: green;
   font-size:3em;
   font-weight:bold; 
   vertical-align: middle; 
@@ -98,7 +107,7 @@ footer {
 }
 
 .whiteRow { 
-  background-color: white;
+  background-color: black;
   line-height: 2px;
 }
 
