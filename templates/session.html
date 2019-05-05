@@ -5,8 +5,10 @@
 {% endblock %}
 {% block article %}
   <article>
-    <div class="big">request.environ: session dictionary</div>
     <table class="longList">
+      <tr>
+        <th colspan="2" class="dict">request.environ: session dictionary</th>
+      </tr>
       <tr class="metaData">
         <th>key</th>
         <th>value</th>
@@ -19,8 +21,10 @@
       {% endfor %} 
     </table>
     <br>
-    <div class="big">app.config: you can print values in interactive console</div>
     <table>
+      <tr>
+        <th colspan="2" class="dict">app.config: you can print values in interactive console</th>
+      </tr>
       <tr class="metaData">
         <th>key</th>
         <th>value</th>

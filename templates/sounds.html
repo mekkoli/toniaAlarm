@@ -5,21 +5,28 @@
 {% endblock %}
 {% block article %}
 <article>
-  <div class="big">sounds list</div>
   <table class="listSound">
     <tr>
       <th>n</th><th>filename</th><th>dateTime</th><th>size</th><th>del</th>
     </tr>
     {% for fileName in fileList %}
         <tr>
-          <td>{{ fileName[0] }}</td>
           <td>
-            {{ fileName[3] }}<br>
-            <audio controls><source src="/static/snds/{{ fileName[3] }} "></audio>
-            </td>
-            <td>{{ fileName[2] }}</td>
-            <td>{{ fileName[1] }}</td>
-            <td><a href="{{url_for('delFile', fileName=fileName[3]) }}"><img width="32"src="{{ url_for('static', filename='imgs/delete.png') }}"></a></td>
+            {{ fileName[0] }}
+            <img 
+              width="20" 
+              src="{{ url_for('static', filename='imgs/pause.png') }}"
+              onclick="document.getElementById('{{ fileName[3] }}').pause()">
+            <img 
+              width="20" 
+              src="{{ url_for('static', filename='imgs/play.png') }}"
+              onclick="document.getElementById('{{ fileName[3] }}').play()">
+            <audio id="{{ fileName[3] }}"><source src="/static/snds/{{ fileName[3] }}"></audio>
+          </td>
+          <td>{{ fileName[3] }}</td>
+          <td>{{ fileName[2] }}</td>
+          <td>{{ fileName[1] }}</td>
+          <td><a href="{{url_for('delFile', fileName=fileName[3]) }}"><img width="20"src="{{ url_for('static', filename='imgs/delete.png') }}"></a></td>
         </tr>
     {% endfor %}
     <tr>

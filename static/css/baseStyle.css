@@ -42,7 +42,7 @@ nav {
   border-radius: 10px;
   min-height: 200px;
   overflow: hiden;
-  background-color:black;
+  background-color: lightgreen;
   color: #080;
 }
 /* Style the list inside the menu */
@@ -55,15 +55,12 @@ article {
   float: left;
   padding: 10px;
   width: 70%;
-  background-color:black;
-  color: #080;
 }
 /* Clear floats after the columns */
 section:after {
   content: "";
   display: table;
   clear: both;
-  background-color:black;
   color: #080;
 }
 /* Style the footer */
@@ -86,7 +83,7 @@ footer {
 
 /* my simplest css */
 .big {
-  color: green;
+  color: darkgreen;
   font-size:1.2em;
   font-weight:bold;  
 }
@@ -120,6 +117,7 @@ footer {
   padding: 4px;
   font-size:0.8em;
   font-weight:normal;
+  color:#252;
 }
 .listSound th {
   font-weight:bold;
@@ -129,9 +127,10 @@ footer {
   width:100%;
   font-size:1em;
 }
-.listSound tr:nth-child(even) {background-color: #cfc;}
+.listSound tr:nth-child(even) {background-color: #cdc;}
+.listSound tr:nth-child(odd) {background-color: #ada;}
 .longList table, th, tr, td {
-  padding:0px;
+  padding:2px;
 }
 .key {
   font-weight: bold;
@@ -146,4 +145,11 @@ footer {
   text-align:center;
   color: #cec;
   background-color: darkgreen;
+}
+.dict {
+  font-size:1.5em;
+  color: #cec;
+  background-color: darkgreen;
+  text-align:left;
+  padding:4px;
 }

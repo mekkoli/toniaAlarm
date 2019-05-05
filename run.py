@@ -26,6 +26,8 @@ credentials = {
 }
 socketList = [
   True,
+  False,
+  True,
   False
 ]
 power = 'on'
