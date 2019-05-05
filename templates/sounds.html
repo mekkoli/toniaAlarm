@@ -4,6 +4,22 @@
   {{ super() }}
 {% endblock %}
 {% block article %}
+<script>
+  function playPause(mp3Id, imageId){
+    mp3 = document.getElementById(mp3Id);
+    image = document.getElementById(imageId);
+    if (image.src.indexOf("play.png") >= 0 ) {
+      mp3.play();
+      image.setAttribute("src", "{{ url_for('static', filename='imgs/pause.png') }}");
+    }   
+    else if (image.src.indexOf("pause.png") >= 0 ) {
+      mp3.pause();
+      mp3.currentTime = 0;
+      image.setAttribute("src", "{{ url_for('static', filename='imgs/play.png') }}");
+    } 
+  }
+
+</script>
 <article>
   <table class="listSound">
     <tr>
@@ -11,19 +27,15 @@
     </tr>
     {% for fileName in fileList %}
         <tr>
+          <td>{{ fileName[0] }}</td>
           <td>
-            {{ fileName[0] }}
-            <img 
-              width="20" 
-              src="{{ url_for('static', filename='imgs/pause.png') }}"
-              onclick="document.getElementById('{{ fileName[3] }}').pause()">
-            <img 
+            <img
+              id="mp3_{{ fileName[0] }}" 
               width="20" 
               src="{{ url_for('static', filename='imgs/play.png') }}"
-              onclick="document.getElementById('{{ fileName[3] }}').play()">
-            <audio id="{{ fileName[3] }}"><source src="/static/snds/{{ fileName[3] }}"></audio>
+              onclick="playPause('{{ fileName[3] }}', this.id)">
+            <audio id="{{ fileName[3] }}" loop="true"><source src="/static/snds/{{ fileName[3] }}"></audio>{{ fileName[3] }}
           </td>
-          <td>{{ fileName[3] }}</td>
           <td>{{ fileName[2] }}</td>
           <td>{{ fileName[1] }}</td>
           <td><a href="{{url_for('delFile', fileName=fileName[3]) }}"><img width="20"src="{{ url_for('static', filename='imgs/delete.png') }}"></a></td>
@@ -31,7 +43,7 @@
     {% endfor %}
     <tr>
       <form method=post enctype=multipart/form-data action="/upload">
-      <td>file name: </td><td><input type="file" name="file" method="post" ></td><td><input type="submit" value="Upload"></td><td>{{ maxMb }}M</td><td>max</td>
+      <td colspan="2"><input type="file" name="file" method="post"></td><td><input type="submit" value="Upload"></td><td>{{ maxMb }}.0M</td><td>max</td>
     </tr>
   </table>
   {{ messageList() }}

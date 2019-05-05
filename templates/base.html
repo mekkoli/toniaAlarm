@@ -27,10 +27,10 @@
         {% block nav %}
           {% if session['logged_in'] %}
             <nav>
-              {{nav_li('confs', 'configure tonia alarm') }}
+              {{nav_li('confs', 'configure') }}
               {{nav_li('sounds', 'alarm sounds') }}
-              {{nav_li('enviroGet', 'read running enviro object') }}
-              {{nav_li('sessionGet', 'read session object') }}
+              {{nav_li('enviroGet', 'enviro objs') }}
+              {{nav_li('sessionGet', 'session objs') }}
               {{nav_li('console', 'flask console', 'console') }}
               {{nav_li('myConsole', 'my flask console', 'myConsole') }}
               {{nav_li('logout', 'logout') }}

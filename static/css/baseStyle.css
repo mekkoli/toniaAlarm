@@ -33,7 +33,6 @@ header {
 /* Create two columns/boxes that floats next to each other */
 nav {
   color: darkgreen;
-  background-color: #efe;
   float: left;
   padding-left: 10px;
   padding-top: 0px;
@@ -42,7 +41,7 @@ nav {
   border: 1px solid darkgreen;
   border-radius: 10px;
   min-height: 200px;
-  overflow: hiden;
+  overflow: hidden;
   background-color: lightgreen;
   color: #080;
 }
