@@ -27,8 +27,7 @@ credentials = {
 socketList = [
   True,
   False,
-  True,
-  False
+  True
 ]
 power = 'on'
 telegramDict = {

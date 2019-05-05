@@ -5,6 +5,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color:black;
   color: #080;
+  padding:; 4px;
 }
 
 /* unvisited link */
@@ -53,8 +54,13 @@ nav ul {
 }
 article {
   float: left;
-  padding: 10px;
+  padding: 2px;
   width: 70%;
+  min-height: 200px;
+  height:100%;
+  border: 1px solid darkgreen;
+  border-radius: 10px;
+  background-color: lightgreen;
 }
 /* Clear floats after the columns */
 section:after {
@@ -75,7 +81,7 @@ footer {
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media (max-width: 600px) {
-  nav, article {
+  nav {
     width: 100%;
     height: auto;
   }
@@ -118,6 +124,8 @@ footer {
   font-size:0.8em;
   font-weight:normal;
   color:#252;
+  border-width: 1px;
+  border-color: darkgreen;
 }
 .listSound th {
   font-weight:bold;
@@ -125,10 +133,9 @@ footer {
 .listSound tr {
   text-align: left;
   width:100%;
-  font-size:1em;
 }
-.listSound tr:nth-child(even) {background-color: #cdc;}
-.listSound tr:nth-child(odd) {background-color: #ada;}
+.listSound tr:nth-child(even) {background-color: #afa;}
+.listSound tr:nth-child(odd) {background-color: #cfc;}
 .longList table, th, tr, td {
   padding:2px;
 }
