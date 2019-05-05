@@ -5,15 +5,15 @@
 {% endblock %}
 {% block article %}
   <article>
-    <table class="longList">
+    <table>
       <tr>
-        <th colspan="2" class="dict">request.environ: session dictionary</th>
+        <th colspan="2" class="dict">app.config: you can print values in interactive console</th>
       </tr>
       <tr class="metaData">
         <th>key</th>
         <th>value</th>
       </tr>
-      {% for key, value in sessionDict.items() %}
+      {% for key, value in appDict.items() %}
         <tr>
             <td class="key">{{key}}:</td>
             <td class="value">'{{value}}'</td>

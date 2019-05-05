@@ -138,6 +138,15 @@ def sessionGet():
     currentTime = datetime.datetime.now(),
     title = "read session vars",
     sessionDict = sessionDict,
+    user = session['username']
+  ) 
+
+@app.route('/enviro')
+def enviroGet():
+  return render_template(
+    'enviro.html',
+    currentTime = datetime.datetime.now(),
+    title = "read running environment vars",
     appDict = app.config,
     user = session['username']
   ) 
