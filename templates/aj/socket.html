@@ -1,10 +1,11 @@
-{% if socket == False %} {{ n + 1 }}
+{{ n + 1 }}
+{% if socket == False %}
   <img 
     width="32" 
     onclick="socket('socket{{ n }}')"
     title="socket {{ n + 1 }} off (click to switch on)" 
     src="{{ url_for('static', filename='imgs/socketOff.png') }}"> off
-{% else %} {{ n + 1 }}
+{% else %} 
   <img 
     width="32" 
     onclick="socket('socket{{ n }}')"

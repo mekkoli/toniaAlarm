@@ -34,7 +34,7 @@
               width="20" 
               src="{{ url_for('static', filename='imgs/play.png') }}"
               onclick="playPause('{{ fileName[3] }}', this.id)">
-            <audio id="{{ fileName[3] }}" loop="true"><source src="/static/snds/{{ fileName[3] }}"></audio>{{ fileName[3] }}
+            <audio id="{{ fileName[3] }}"><source src="/static/snds/{{ fileName[3] }}"></audio>{{ fileName[3] }}
           </td>
           <td>{{ fileName[2] }}</td>
           <td>{{ fileName[1] }}</td>

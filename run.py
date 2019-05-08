@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 import os
 
 UPLOAD_FOLDER = 'static/snds'
-ALLOWED_EXTENSIONS = set(['mp3'])
+ALLOWED_EXTENSIONS = set(['mp3','wav'])
 MAX_MB = 8
 
 app = Flask(__name__)
