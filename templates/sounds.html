@@ -5,41 +5,70 @@
 {% endblock %}
 {% block article %}
 <script>
-  function playPause(mp3Id, imageId){
-    mp3 = document.getElementById(mp3Id);
+  function playPause(sndId, imageId){
+    snd = document.getElementById(sndId);
     image = document.getElementById(imageId);
     if (image.src.indexOf("play.png") >= 0 ) {
-      mp3.play();
+      snd.play();
       image.setAttribute("src", "{{ url_for('static', filename='imgs/pause.png') }}");
     }   
     else if (image.src.indexOf("pause.png") >= 0 ) {
-      mp3.pause();
-      mp3.currentTime = 0;
+      snd.pause();
+      snd.currentTime = 0;
       image.setAttribute("src", "{{ url_for('static', filename='imgs/play.png') }}");
     } 
+    snd.onended = function() {
+      image.setAttribute("src", "{{ url_for('static', filename='imgs/play.png') }}");
+    };
   }
+  
+
+
+
+
+
+
+
+
+
+  function getRepeatCount(cellId){
+    cell = document.getElementById(cellId);
+    cell.innerHTML = "<form method='post' action=''><input type='text' name='repeatCount' value='" + cell.innerHTML + "' size='4' style='color:lightgreen'><input type='submit' value='ok'></form>";
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 <article>
   <table class="listSound">
     <tr>
-      <th>n</th><th>filename</th><th>dateTime</th><th>size</th><th>del</th>
+      <th>n</th><th>filename</th><th>dateTime</th><th>size</th><th>repeat count</th><th>del</th>
     </tr>
     {% for fileName in fileList %}
-        <tr>
-          <td>{{ fileName[0] }}</td>
-          <td>
-            <img
-              id="mp3_{{ fileName[0] }}" 
-              width="20" 
-              src="{{ url_for('static', filename='imgs/play.png') }}"
-              onclick="playPause('{{ fileName[3] }}', this.id)">
-            <audio id="{{ fileName[3] }}"><source src="/static/snds/{{ fileName[3] }}"></audio>{{ fileName[3] }}
-          </td>
-          <td>{{ fileName[2] }}</td>
-          <td>{{ fileName[1] }}</td>
-          <td><a href="{{url_for('delFile', fileName=fileName[3]) }}"><img width="20"src="{{ url_for('static', filename='imgs/delete.png') }}"></a></td>
-        </tr>
+      <tr>
+        <td>{{ fileName[0] }}</td>
+        <td>
+          <img
+            id="snd_{{ fileName[0] }}" 
+            width="20" 
+            src="{{ url_for('static', filename='imgs/play.png') }}"
+            onclick="playPause('{{ fileName[3] }}', this.id)">
+          <audio id="{{ fileName[3] }}"><source src="/static/snds/{{ fileName[3] }}"></audio>{{ fileName[3] }}
+        </td>
+        <td>{{ fileName[2] }}</td>
+        <td>{{ fileName[1] }}</td>
+        <td id="rep_{{ fileName[0] }}" style="text-align:center" onclick="getRepeatCount(this.id)">{{ fileName[4] }}</td>
+        <td><a href="{{url_for('delFile', fileName=fileName[3]) }}"><img width="20"src="{{ url_for('static', filename='imgs/delete.png') }}"></a></td>
+      </tr>
     {% endfor %}
     <tr>
       <form method=post enctype=multipart/form-data action="/upload">

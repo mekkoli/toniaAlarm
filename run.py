@@ -69,6 +69,7 @@ def sounds():
           fileName += desFileAscii.pop(3) + " "
         fileName = fileName[:-1]  #del last space
         desFileAscii.append(fileName)
+        desFileAscii.append(1) #default repeat count
         files.append(desFileAscii)
     return render_template(
       'sounds.html',
