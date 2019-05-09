@@ -10,9 +10,9 @@
     image = document.getElementById(imageId);
     if (image.src.indexOf("play.png") >= 0 ) {
       snd.play();
-      image.setAttribute("src", "{{ url_for('static', filename='imgs/pause.png') }}");
+      image.setAttribute("src", "{{ url_for('static', filename='imgs/stop.png') }}");
     }   
-    else if (image.src.indexOf("pause.png") >= 0 ) {
+    else if (image.src.indexOf("stop.png") >= 0 ) {
       snd.pause();
       snd.currentTime = 0;
       image.setAttribute("src", "{{ url_for('static', filename='imgs/play.png') }}");
@@ -31,9 +31,21 @@
 
 
 
-  function getRepeatCount(cellId){
+  function changeRepeatCount(cellId){
     cell = document.getElementById(cellId);
-    cell.innerHTML = "<form method='post' action=''><input type='text' name='repeatCount' value='" + cell.innerHTML + "' size='4' style='color:lightgreen'><input type='submit' value='ok'></form>";
+    oldHtml = document.getElementById(cellId).innerHTML;
+    form = `
+      <form method='post' action=''>
+      <input type='text' name='repeatCount' value='` + cell.innerHTML + `' size='4' style='color:lightgreen'>
+      <input type='submit' value='ok'>
+      </form>
+    `;
+    cell.setAttribute("onclick","")
+    cell.innerHTML = form;
+    {# jQuery("#" + cellId).load("{{ url_for('changeRepeatCount') }}") #}
+    alert(cellId);
+    cell.innerHTML=oldHtml;
+    cell.setAttribute("onclick","changeRepeatCount(" + cellId +")")
   }
 
 
@@ -66,7 +78,7 @@
         </td>
         <td>{{ fileName[2] }}</td>
         <td>{{ fileName[1] }}</td>
-        <td id="rep_{{ fileName[0] }}" style="text-align:center" onclick="getRepeatCount(this.id)">{{ fileName[4] }}</td>
+        <td id="rep_{{ fileName[0] }}" style="text-align:center" onclick="changeRepeatCount(this.id)">{{ fileName[4] }}</td>
         <td><a href="{{url_for('delFile', fileName=fileName[3]) }}"><img width="20"src="{{ url_for('static', filename='imgs/delete.png') }}"></a></td>
       </tr>
     {% endfor %}
