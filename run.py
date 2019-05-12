@@ -85,6 +85,8 @@ def sounds():
         'dateTime': element[2],
       }
       soundList.append(soundDict)
+      if fileName not in soundCount:
+        soundCount[fileName] = 1
     return render_template(
       'sounds.html',
       currentTime = datetime.datetime.now(),

@@ -159,8 +159,17 @@ footer {
   padding:4px;
 }
 .count {
-  color:green;
+  color:darkgreen;
+  background-color:#cfc;
+  text-align:left;
+  font-size:1.1em;
+  font-weight: bold;
   text-align:center;
-  font-size:1.2em;
+}
+.login {
+  color:darkgreen;
+  background-color:#cfc;
+  text-align:left;
+  font-size:1.1em;
   font-weight: bold;
 }

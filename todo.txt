@@ -1,0 +1,2 @@
+- create json configuration file where store all toniaAlarm data.
+- when write data save it to json file
