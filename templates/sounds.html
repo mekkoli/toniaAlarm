@@ -22,43 +22,38 @@
     };
   }
   
-
-
-
-
-
-
-
-
-
-  function changeRepeatCount(cellId, imgId){
-    cell = document.getElementById(cellId);
-    img = document.getElementById(imgId);
-    oldHtml = document.getElementById(cellId).innerHTML;
-    form = `
-      <form method='post' action='' name='changeCount' id='changeCount'>
-      <input type='text' name='repeatCount' value='` + cell.innerHTML + `' size='4' style='color:lightgreen'>
-      </form>
+  function setInputBox(index, fileName, repeatCount){
+    cellCount = document.getElementById(index);
+    cellImg = document.getElementById(fileName);
+    cellCount.innerHTML = "<input id='input" + index + "' type='text' value='" + repeatCount + "' size='2' class='count'>";
+    img = `
+      <img 
+        src="{{ url_for('static', filename='imgs/submit.png')}}" 
+        width="20"
+        onclick="saveRepeatCount('` + index + `', '` + fileName + `', '` + repeatCount + `')"
+        onmouseover="this.style.cursor = 'pointer'"
+        onmouseout="this.style.cursor = 'default'">
     `;
-    img.setAttribute("onclick","document.getElementById('changeCount').submit()")
-    img.setAttribute("src", "{{ url_for('static', filename='imgs/submit.png') }}");
-    cell.innerHTML = form;
-    {# jQuery("#" + cellId).load("{{ url_for('changeRepeatCount') }}") #}
-    //alert(cellId);
-    //cell.innerHTML=oldHtml;
-    cell.setAttribute("onclick","changeRepeatCount(" + cellId + ", " + imgId + ")")
+    cellImg.innerHTML=img;
+    document.getElementById('input' + index).select();
   }
 
-
-
-
-
-
-
-
-
-
-
+  function saveRepeatCount(index, fileName, repeatCount){
+    cellImg = document.getElementById(fileName);
+    inputBox = document.getElementById('input' + index);
+    img = `
+      <img 
+        src="{{ url_for('static', filename='imgs/mod.png')}}" 
+        width="20"
+        onclick="setInputBox('` + index + `', '` + fileName + `', '` + repeatCount + `')"
+        onmouseover="this.style.cursor = 'pointer'"
+        onmouseout="this.style.cursor = 'default'">
+    `;
+    cellImg.innerHTML = img;
+    newCount = inputBox.value;
+    //alert("localhost:2222/aj/changeCount/"+ fileName + "/"  + newCount);
+    jQuery("#" + index).load("aj/changeCount/" + fileName + "/" + newCount);
+  }
 
 </script>
 <article>
@@ -66,29 +61,32 @@
     <tr>
       <th>n</th><th>filename</th><th>dateTime</th><th>size</th><th>repeat count</th><th>mod</th><th>del</th>
     </tr>
-    {% for fileName in fileList %}
+    {% for soundDict in soundList %}
       <tr>
-        <td>{{ fileName[0] }}</td>
+        <td>{{ soundDict.index }}</td>
         <td>
           <img
-            id="snd_{{ fileName[0] }}" 
+            id="snd_{{ soundDict.index }}" 
             width="20" 
             src="{{ url_for('static', filename='imgs/play.png') }}"
-            onclick="playPause('{{ fileName[3] }}', this.id)">
-          <audio id="{{ fileName[3] }}"><source src="/static/snds/{{ fileName[3] }}"></audio>{{ fileName[3] }}
+            onclick="playPause('play_{{ soundDict.fileName }}', this.id)"
+            onmouseover="this.style.cursor = 'pointer'"
+            onmouseout="this.style.cursor = 'default'">
+          <audio id="play_{{ soundDict.fileName }}"><source src="/static/snds/{{ soundDict.fileName }}"></audio>{{ soundDict.fileName }}
         </td>
-        <td>{{ fileName[2] }}</td>
-        <td>{{ fileName[1] }}</td>
-        <td style="text-align:center;font-size:1.4em;font-weight: bold" id="rep_{{ fileName[0] }}">{{ fileName[4] }}</td>
-        <td> 
+        <td>{{ soundDict.dateTime }}</td>
+        <td>{{ soundDict.size }}</td>
+        <td id="{{ soundDict.index }}" class="count">{{ soundCount[soundDict.fileName] }}</td>
+        <td id="{{ soundDict.fileName }}">
           <img 
-            src = "{{ url_for('static', filename='imgs/mod.png') }}" 
-            width = "20" 
-            onclick = "changeRepeatCount('rep_{{ fileName[0] }}', 'img_{{ fileName[0] }}')" 
-            id = "img_{{ fileName[0] }}" >
+            src="{{ url_for('static', filename='imgs/mod.png') }}" 
+            width = "20"
+            onclick = "setInputBox('{{ soundDict.index }}', '{{ soundDict.fileName }}', '{{ soundCount[soundDict.fileName] }}' )"
+            onmouseover="this.style.cursor = 'pointer'"
+            onmouseout="this.style.cursor = 'default'">
         </td>
         <td>
-          <a href="{{url_for('delFile', fileName=fileName[3]) }}">
+          <a href="{{url_for('delFile', fileName=soundDict.fileName) }}">
           <img width="20"src="{{ url_for('static', filename='imgs/delete.png') }}"></a>
         </td>
       </tr>
@@ -96,7 +94,7 @@
     <tr>
       <form method=post enctype=multipart/form-data action="/upload">
       <td colspan="2"><input type="file" name="file" method="post"></td>
-      <td><input type="submit" value="Upload"></td><td>{{ maxMb }}.0M</td><td>max</td>
+      <td><input type="submit" value="Upload"></td><td>{{ maxMb }}.0M</td><td colspan="3">max</td>
     </tr>
   </table>
   {{ messageList() }}

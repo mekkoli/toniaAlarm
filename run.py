@@ -12,6 +12,7 @@ MAX_MB = 8
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = MAX_MB * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'azzarola'
 
@@ -36,6 +37,9 @@ telegramDict = {
 	'chatKey': 'sjdhfghds'
 }
 
+soundList = []
+soundCount = {}
+
 @app.template_filter("datetimefilter")
 def datetimefilter(value, format='%Y-%m-%d %02H:%02M:%02S'):
   """Convert a datetime to a differentformat."""
@@ -43,11 +47,12 @@ def datetimefilter(value, format='%Y-%m-%d %02H:%02M:%02S'):
 
 @app.route("/sounds")
 def sounds():
+  global soundList
+  global soundCount
   if session.get('logged_in'):
     fileListStr = subprocess.check_output(["ls", "-l", "-h", "-tr", "--time-style=long-iso", "static/snds/"])
     fileList=fileListStr.split(b'\n')
     files=[]
-    count = 0
     for str in fileList:
       desFile = str.split()
       if len(desFile) >=  4:
@@ -58,26 +63,36 @@ def sounds():
         desFileAscii = []
         for str in desFile:
           desFileAscii.append(str.decode('utf-8'))
-        count += 1
-        desFileAscii.insert(0,count)
-        date = desFileAscii.pop(2)
-        time = desFileAscii.pop(2)
+        date = desFileAscii.pop(1)
+        time = desFileAscii.pop(1)
         dateTime = date + " " + time
-        desFileAscii.insert(2,dateTime)
+        desFileAscii.append(dateTime)
         fileName = ""
         while len(desFileAscii) > 3:
           fileName += desFileAscii.pop(3) + " "
         fileName = fileName[:-1]  #del last space
         desFileAscii.append(fileName)
-        desFileAscii.append(1) #default repeat count
         files.append(desFileAscii)
+    soundList = []
+    n = 0;
+    for element in files:
+      n += 1
+      fileName = element[1]
+      soundDict={
+        'index':    n,
+        'fileName': fileName,
+        'size':     element[0],
+        'dateTime': element[2],
+      }
+      soundList.append(soundDict)
     return render_template(
       'sounds.html',
       currentTime = datetime.datetime.now(),
       annoScolas = "18/19",
       title = "tonia alarm web configuration",
       user = session['username'],
-      fileList = files,
+      soundList = soundList,
+      soundCount = soundCount,
       maxMb = MAX_MB
     )
   else:
@@ -177,11 +192,11 @@ def shutdown_server():
 
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+  return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
+  global soundCount
   if request.method == 'POST':
     # check if the post request has the file part
     if 'file' not in request.files:
@@ -196,6 +211,7 @@ def upload_file():
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
       file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      soundCount[filename] = 1
       return redirect(url_for('sounds'))
   else:
     flash('no get')
@@ -205,7 +221,9 @@ def upload_file():
 
 @app.route('/delFile/<string:fileName>')
 def delFile(fileName):
+  global soundCount
   subprocess.call(["rm", "static/snds/" + fileName])
+  soundCount.pop(fileName)
   return redirect(url_for('sounds'))
 
 @app.route('/console')
@@ -240,6 +258,15 @@ def changeSocket(socket):
     '/aj/socket.html',
     socket = socketList[n],
     n = n
+  )
+
+@app.route('/aj/changeCount/<string:fileName>/<string:newCount>')
+def changeCount(fileName,newCount):
+  global soundCount
+  soundCount[fileName]=int(newCount)
+  return render_template(
+    '/aj/changeCount.html',
+    newCount = newCount
   )
 
 if __name__ == '__main__':
