@@ -65,8 +65,8 @@
       <tr>
         <td>{{ soundDict.index }}</td>
         <td>
-          <img
-            id="snd_{{ soundDict.index }}" 
+          <img 
+            id="snd_{{ soundDict.fileName }}" 
             width="20" 
             src="{{ url_for('static', filename='imgs/play.png') }}"
             onclick="playPause('play_{{ soundDict.fileName }}', this.id)"
